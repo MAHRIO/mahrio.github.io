@@ -11,7 +11,10 @@
     <script type="text/javascript">
         let video = document.getElementById('video');
         window.addEventListener("load", () => {
-            navigator.mediaDevices.getUserMedia({ video: {facingMode: { exact: "environment" }}, audio: false })
+            navigator.mediaDevices.getUserMedia({ video: {
+                width: { min: 1024, ideal: 1280, max: 1920 },
+                height: { min: 776, ideal: 720, max: 1080 }
+            }, audio: false })
             .then(function(stream) {
                 video.srcObject = stream;
                 //video.play();
