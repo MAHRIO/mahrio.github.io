@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <style>
+    
+    </style>
+    <body>
+        <div class="camera">
+            <video id="video" autoplay playsinline>Video stream not available.</video>            
+          </div>
+    </body>
+    <script type="text/javascript">
+        let video = document.getElementById('video');
+        window.addEventListener("load", () => {
+            navigator.mediaDevices.getUserMedia({ video: {facingMode: { exact: "environment" }}, audio: false })
+            .then(function(stream) {
+                video.srcObject = stream;
+                //video.play();
+            })
+            .catch(function(err) {
+                alert("An error occurred! " + err);
+            });
+            video.addEventListener('canplay', function(ev){
+                
+            }, false);
+        }, false);
+    </script>
+</html>
