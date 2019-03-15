@@ -1,7 +1,11 @@
 <html>
     <head></head>
     <style>
-    
+    body{ padding: 0; margin: 0; background: #000; }
+    .camera #video {
+        width: 100%;
+        height: 100vh;
+    }
     </style>
     <body>
         <div class="camera">
@@ -9,19 +13,23 @@
           </div>
     </body>
     <script type="text/javascript">
-        let video = document.getElementById('video');
+        let video = document.getElementById('video'),
+            platform = navigator.platform.toLowerCase();
+
         window.addEventListener("load", () => {
-            debugger;
-            navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+            let v = { video: true};
+
+            // show rear-facing camera on dual-camera phone. default is front facing
+            if( platform === 'iphone' ) { v.video = { facingMode: { exact: "environment" }} }
+
+            navigator.mediaDevices.getUserMedia({ ...v, audio: false })
             .then(function(stream) {
                 video.srcObject = stream;
-                //video.play();
             })
             .catch(function(err) {
                 alert("An error occurred! " + err);
             });
             video.addEventListener('canplay', function(ev){
-                
             }, false);
         }, false);
     </script>
